@@ -4,16 +4,9 @@ import { IoCloseCircle } from "react-icons/io5";
 import { useMutation,useQuery, gql } from '@apollo/client';
 import logoTrash from '../../imagens/trash.png'
 import { BiIdCard } from "react-icons/bi";
-import { PAGINATED_QUERY } from '../../graphQL/query/card/CardQuery.js';
+import { DELETE_MUTATION } from '../../graphQL/mutation/card/CardMutation.js';
 
-export const DELETE_MUTATION = gql`
-  mutation DeleteItem($id: Int!) {
-    delete(id: $id) {
-      success
-      errors
-    }
-  }
-`;
+
 
 function ModalDeletarCard() {
     const { isModalOpenDeleteCard, closeModalDeleteCard, cardSelected,updateSetCard,currentPage, updateCards,cards,triggerReload } = UseContext();

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { UseContext } from '../../Context/Context.js';
 import { FaWpforms } from "react-icons/fa6";
+import { useMutation } from "@apollo/client";
+import { CREATE_CARD } from '../../graphQL/mutation/card/CardMutation.js';
 
 const ModalCard = () => {
     const { isModalOpen, closeModal } = UseContext();
@@ -10,46 +12,43 @@ const ModalCard = () => {
     const handleNameChange = (e) => setCardName(e.target.value);
     const handleFileChange = (e) => setFile(e.target.files[0]);
 
+
+  const [createCard, { data, loading, error }] = useMutation(CREATE_CARD, {
+ 
+    onCompleted: (data) => {
+      if (data.createCard.success) {
+        alert("Card criado com sucesso!");
+      } else {
+        alert("Falha ao criar o card.");
+      }
+    }
+  });
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (!cardName || !file) {
-            console.log("teste")
 
             return;
         }
-
+console.log(file)
         const formData = new FormData();
-        formData.append("cardName", cardName);
-        formData.append("photo", file);
+        formData.append("name", cardName);
+        formData.append("file", file);
+      
+
+        console.log(formData);
 
         for (let pair of formData.entries()) {
             console.log(pair[0] + ": " + pair[1]);
         }
 
-        try {
-
-            const response = await fetch("https://seu-backend-api.com/cadastrar-card", {
-                method: "POST",
-                body: formData,
-            });
-
-
-            if (!response.ok) {
-                throw new Error("Erro ao enviar os dados.");
-            }
-
-            const result = await response.json();
-
-
-            alert("Card cadastrado com sucesso!");
-            closeModal();
-
-        } catch (error) {
-
-        } finally {
-
-        }
+      
+    try {
+        createCard({ variables: { cardName, file } });
+      } catch (err) {
+        console.error("Erro ao criar o card:", err);
+      }
     };
 
     
@@ -155,7 +154,7 @@ const ModalCard = () => {
                         text-[11pt]">INCLUA UMA IMAGEM PARA APARECER NO CARD</label>
                         <input
                             type="file"
-                            accept=".txt"
+                            accept=".png"
                             onChange={handleFileChange}
                             className="
                             mt-2 

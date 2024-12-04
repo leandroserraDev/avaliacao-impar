@@ -46,7 +46,7 @@ export default function HomePage() {
       setPageSize(result.data.paginated.result.totalCount <= 10 ? 1 : result.data.paginated.result.pageSize )
       updateCards(result.data.paginated.result.items)
         });
-        updateCurrentPage(currentPage-1);
+        updateCurrentPage(currentPage <= 1 ? 1 : currentPage - 1);
         triggerReload()
       }
 
