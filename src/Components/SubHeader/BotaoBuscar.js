@@ -1,18 +1,15 @@
 
 import { createContext } from "react";
 import { FiSearch } from "react-icons/fi";
-import { useTextQuery } from '../../Context/TextQueryContext.js';
-import { TextQueryProvider } from '../../Context/TextQueryContext.js'
-
+import { UseContext } from '../../Context/Context.js';
 export default function BotaoBuscar(){
-  const { updateQuery } = useTextQuery();
+  const { updateQuery } = UseContext();
   
   const handleSearch = (e) => {
-    updateQuery(e.target.value); // Atualiza a consulta no contexto
+    updateQuery(e.target.value); 
   };
 
     return(
-      <TextQueryProvider>
 
         <div className="flex items-center justify-center min-h-screen p-4 w-full h-full">
       <div className="relative w-[70%] mt-40">
@@ -33,7 +30,6 @@ export default function BotaoBuscar(){
         </span>
       </div>
     </div>
-    </TextQueryProvider>
     
     )
 }

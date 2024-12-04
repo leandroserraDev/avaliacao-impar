@@ -3,15 +3,26 @@ import './App.css';
 import Header from './Components/Header/Header';
 import Buscar from './Components/SubHeader/SubHeader';
 import HomePage from './Pages/Home/Home';
-import { ModalProvider } from './Context/ModalContext.js'
+import { ContextProvider } from './Context/Context.js';
+import { ApolloProvider } from '@apollo/client';
+import client from './Appolo/Client.js';
+
+
+
 function App() {
   return (
-    <ModalProvider>
+    <ApolloProvider client={client}>
+
+      <ContextProvider>
+
         <div className="flex h-full w-full">
           <HomePage />
         </div>
-    </ModalProvider>
 
+
+      </ContextProvider>
+
+    </ApolloProvider>
   );
 }
 

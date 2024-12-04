@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import BotaoCardEditarGrid from './BotaoCardEditarGrid';
 import BotaoCardExcluirGrid from './BotaoCardExcluirGrid';
 
-const Card = ({ image, cardName, status }) => {
-
-    console.log(image);
+const Card = ({idCard, image, cardName, status }) => {
     return (
         <div className="max-w-sm w-[250px] bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden self-center">
 
             <div className=' shadow-md'>
 
-                <img src={image} alt={cardName} className=" rounded-full w-24 h-24 object-cover  justify-center justify-self-center mt-5" />
+                <img src={`data:image/png;base64,${image}`} alt={cardName} className=" rounded-full w-24 h-24 object-cover  justify-center justify-self-center mt-5" />
 
             <hr className=' w-[180px]  justify-self-center mt-5'/>
 
@@ -26,7 +24,7 @@ const Card = ({ image, cardName, status }) => {
 
             <div className="flex w-full items-center  ">
                 <div className='flex w-full m-1  justify-around'>
-                    <BotaoCardExcluirGrid />
+                    <BotaoCardExcluirGrid idCard={idCard}/>
                     <BotaoCardEditarGrid />
 
                 </div>

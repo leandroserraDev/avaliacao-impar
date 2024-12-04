@@ -2,32 +2,74 @@ import SubHeader from "../../Components/SubHeader/SubHeader";
 import Header from "../../Components/Header/Header";
 import Grid from "../../Components/Grid/Grid";
 import { IconContext } from "react-icons";
-import { useTextQuery } from '../../Context/TextQueryContext.js'
-import { useEffect } from "react";
+import { UseContext } from '../../Context/Context.js'
+import { useEffect, useState } from "react";
 import ModalCard from "../../Components/Modals/ModalCard.js";
-export default function HomePage() {
-    const { query } = useTextQuery();
-    const cards = [
-        { cardName: "Card 1", status: "Ativo", image: "https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" },
-        { cardName: "Card 2", status: "Inativo", image: "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2VtfGVufDB8fDB8fHww" },
-        { cardName: "Card 3", status: "Ativo", image: "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg" },
-        { cardName: "Card 4", status: "Inativo", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBD_rOB19y9Uq-TdyNSfoZB8pTdFY5csJF5A&s" },
-        { cardName: "Card 5", status: "Ativo", image: "https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" },
-        { cardName: "Card 6", status: "Ativo", image: "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2VtfGVufDB8fDB8fHww" },
-        { cardName: "Card 7", status: "Inativo", image: "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg" },
-        { cardName: "Card 8", status: "Ativo", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBD_rOB19y9Uq-TdyNSfoZB8pTdFY5csJF5A&s" },
-        { cardName: "Card 9", status: "Inativo", image: "https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" },
-        { cardName: "Card 10", status: "Ativo", image: "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg" }
-      ];
+import { useQuery, gql } from '@apollo/client';
+import ModalDeletarCard from "../../Components/Modals/ModalDeletarCard.js";
+import { PAGINATED_QUERY } from '../../graphQL/query/card/CardQuery.js';
 
-            
+export default function HomePage() {
+    const { query, currentPage, updateCurrentPage, cards, updateCards, reload, triggerReload } = UseContext();
+    const[pageSize,setPageSize] = useState(1);
+
+
+    const { loading, error, data ,fetchMore, refetch} = useQuery(PAGINATED_QUERY, {
+      variables: { pageNumber: currentPage, pageSize: 10 },
+       fetchPolicy: "cache-and-network",
+      onCompleted: (newData) => {
+        var arrayCards = newData.paginated.result.items
+        
+            updateCards((preview) => [...cards, ...arrayCards])
+            setPageSize(currentPage === newData.paginated.result.pageSize || newData.paginated.result.pageSize <= 1 ? -1 : newData.paginated.result.pageSize )
+         
+      }
+    })
+  
+
+    const AdicionarMais = () => {
+      
+
+        updateCurrentPage(currentPage+1);
+
+        // Recarrega a consulta
+        fetchMore ({
+          variables: { pageNumber: currentPage, pageSize: 10 }});
+ 
+
+    };
+    useEffect(() => {
+
+      if(reload){
+        refetch({pageNumber: 1, pageSize:10}).
+        then((result) => {
+      setPageSize(result.data.paginated.result.totalCount <= 10 ? 1 : result.data.paginated.result.pageSize )
+      updateCards(result.data.paginated.result.items)
+        });
+        updateCurrentPage(currentPage-1);
+        triggerReload()
+      }
+
+    }, [reload]);
+
+    if (error) return <pre>{error.message}</pre>
+
+
+
     return (
         
-    <div className="flex w-full  flex-col ">
+    <div className="flex w-full  flex-col overflowX-hidden  inset-0">
         <Header/>
         <SubHeader/>
-        <Grid cards={query ? cards.filter(obj => obj.cardName.toLowerCase().includes(query.toLowerCase())): cards}/>
+        <Grid 
+        currentPage={currentPage}
+        pageSize={pageSize}
+        reloadData={() => AdicionarMais()} cards={cards ? 
+          cards.filter(obj => obj.name.toLowerCase().includes(query.toLowerCase())): 
+          cards.items}/>
          <ModalCard />
+         <ModalDeletarCard />
+         
 
     </div>)
 }
