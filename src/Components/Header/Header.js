@@ -1,6 +1,6 @@
 import '../../input.css';
 
-import logo from '../../Logo-impar-normal.png'
+import logo from '../../imagens/Logo-impar-normal.png'
 
 function Header(){
     return (

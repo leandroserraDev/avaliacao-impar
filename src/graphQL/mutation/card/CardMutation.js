@@ -1,5 +1,5 @@
 
-import { useMutation, gql } from '@apollo/client';
+import {  gql } from '@apollo/client';
 
 export const DELETE_MUTATION = gql`
   mutation DeleteItem($id: Int!) {

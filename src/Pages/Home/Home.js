@@ -1,11 +1,10 @@
 import SubHeader from "../../Components/SubHeader/SubHeader";
 import Header from "../../Components/Header/Header";
 import Grid from "../../Components/Grid/Grid";
-import { IconContext } from "react-icons";
 import { UseContext } from '../../Context/Context.js'
 import { useEffect, useState } from "react";
 import ModalCard from "../../Components/Modals/ModalCard.js";
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import ModalDeletarCard from "../../Components/Modals/ModalDeletarCard.js";
 import { PAGINATED_QUERY } from '../../graphQL/query/card/CardQuery.js';
 

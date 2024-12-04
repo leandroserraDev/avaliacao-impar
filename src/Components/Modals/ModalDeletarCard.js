@@ -13,9 +13,6 @@ function ModalDeletarCard() {
 
     const [isAnimating, setIsAnimating] = useState(isModalOpenDeleteCard);
 
-
-    
-
       const [deleteItem, { }] = useMutation(DELETE_MUTATION,{
 
         variables:{id:cardSelected },
@@ -25,8 +22,6 @@ function ModalDeletarCard() {
             alert("Card foi deletado com sucesso")
         }     
     });
-
-    
 
     async function handleDelete()
     {

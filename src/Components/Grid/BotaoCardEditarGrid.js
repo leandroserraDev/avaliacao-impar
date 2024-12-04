@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiTrash2, FiEdit2 } from 'react-icons/fi'; 
+import { FiEdit2 } from 'react-icons/fi'; 
 import { UseContext } from './../../Context/Context.js';
 
 export default function BotaoCardEditarGrid({nameCard, idCard}) {

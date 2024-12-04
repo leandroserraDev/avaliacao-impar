@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-
-function Navegacao({ reloadData, currentPage, pageSize}) {
+function Navegacao({ reloadData, pageSize}) {
   return (
     <div className="
     self-center 

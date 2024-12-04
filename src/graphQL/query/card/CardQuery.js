@@ -1,5 +1,5 @@
 
-import { useQuery, gql } from '@apollo/client';
+import {  gql } from '@apollo/client';
 
 // Query para listar itens paginados
 export const PAGINATED_QUERY = gql`

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import BotaoCardEditarGrid from './BotaoCardEditarGrid';
 import BotaoCardExcluirGrid from './BotaoCardExcluirGrid';
 
-const Card = ({idCard, image, cardName, status }) => {
+const CardGrid = ({idCard, image, cardName, status }) => {
     return (
         <div className="max-w-sm w-[250px] bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden self-center">
 
@@ -36,4 +36,4 @@ const Card = ({idCard, image, cardName, status }) => {
 };
 
 
-export default Card;
+export default CardGrid;

@@ -56,11 +56,13 @@ const updateCards = (data) =>{
     setCards(data)
 }
 
-const [reload, setReload] = useState(false); // Flag para recarregar
+
+
+const [reload, setReload] = useState(false); 
 const triggerReload = () => {
     setCards([])
     setReload(!reload);
-     // Alterna a flag para forçar recarregamento
+   
   };
 
 

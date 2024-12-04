@@ -70,10 +70,6 @@ const ModalCard = () => {
     }, [isModalOpen]);
 
 
-  
-
-
-
     if (!isModalOpen ) return null;
 
     return (
@@ -178,6 +174,7 @@ const ModalCard = () => {
                     file:mr-4 
                     transition duration-200
                                     "
+                                    required
                         />
                     </div>
                     <div className='h-[2px] 

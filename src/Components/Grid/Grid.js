@@ -1,5 +1,5 @@
 import Navegacao from "../Navegacao/Navegacao";
-import Card from "./CardsGrid";
+import CardGrid from "./CardGrid.js";
 
 import { UseContext } from './../../Context/Context.js';
 export default function Grid({ cards, reloadData, currentPage, pageSize }) {
@@ -46,7 +46,7 @@ export default function Grid({ cards, reloadData, currentPage, pageSize }) {
                 {cards && cards.map((obj, index) => {
                     return (
                         <div key={index}>
-                            <Card  idCard={obj.id} cardName={obj.name} status={obj.eStatusCar} image={obj.base64} />
+                            <CardGrid  idCard={obj.id} cardName={obj.name} status={obj.eStatusCar} image={obj.base64} />
                         </div>
                     )
                 })}
