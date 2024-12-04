@@ -14,6 +14,7 @@ export const PAGINATED_QUERY = gql`
         id
         name
         base64
+        eStatusCar
       }
       }
       errors

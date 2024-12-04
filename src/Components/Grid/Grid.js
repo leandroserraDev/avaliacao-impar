@@ -46,7 +46,7 @@ export default function Grid({ cards, reloadData, currentPage, pageSize }) {
                 {cards && cards.map((obj, index) => {
                     return (
                         <div key={index}>
-                            <Card  idCard={obj.id} cardName={obj.name} status={obj.status} image={obj.base64} />
+                            <Card  idCard={obj.id} cardName={obj.name} status={obj.eStatusCar} image={obj.base64} />
                         </div>
                     )
                 })}

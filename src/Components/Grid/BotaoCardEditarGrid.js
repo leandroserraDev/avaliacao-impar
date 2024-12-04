@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { FiTrash2, FiEdit2 } from 'react-icons/fi'; 
 import { UseContext } from './../../Context/Context.js';
 
-export default function BotaoCardEditarGrid() {
+export default function BotaoCardEditarGrid({nameCard, idCard}) {
+  const{ updateNameCard,updateSetCard, openModal } = UseContext();
 
   const [isHovered, setIsHovered] = useState(false);
-  const { openModal } = UseContext();
 
   const handleMouseEnter = () => {
     setTimeout(() => {
@@ -18,9 +18,16 @@ export default function BotaoCardEditarGrid() {
     setIsHovered(false);
 
   };
+
+  const openModalEdit =() =>{
+    updateSetCard(idCard)
+    updateNameCard(nameCard)
+    openModal()
+  }
+
   return (
     <button
-      onClick={openModal}
+      onClick={openModalEdit}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={`flex 

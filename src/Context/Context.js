@@ -14,7 +14,10 @@ export const ContextProvider = ({children}) =>{
     // contexto para usar a modal de cadastro e edição
     const [isModalOpen, setIsModalOpen] = useState(false);
     const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+    const closeModal = () =>{
+        setIsModalOpen(false);
+        setNameCard("")
+    }
 
     //contexto para usar a modal de exclusão
     const [isModalOpenDeleteCard, setIsModalOpenDeleteCard] = useState(false);
@@ -28,6 +31,14 @@ export const ContextProvider = ({children}) =>{
     const updateSetCard =(idCard) =>{
             setCardSelected(idCard)
     }
+
+     //contexto para pegar o card(id) selecionado
+    
+     const[nameCard, setNameCard] = useState(null);
+
+     const updateNameCard =(nameCard) =>{
+        setNameCard(nameCard)
+     }
 
     //current page
 
@@ -68,7 +79,9 @@ const triggerReload = () => {
             cards,
             updateCards,
             reload, 
-            triggerReload
+            triggerReload,
+            nameCard,
+            updateNameCard
 
         }}>
             {children}

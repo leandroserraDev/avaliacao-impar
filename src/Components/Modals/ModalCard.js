@@ -2,21 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { UseContext } from '../../Context/Context.js';
 import { FaWpforms } from "react-icons/fa6";
 import { useMutation } from "@apollo/client";
-import { CREATE_CARD } from '../../graphQL/mutation/card/CardMutation.js';
+import { CREATE_CARD, UPDATE_CARD } from '../../graphQL/mutation/card/CardMutation.js';
 
 const ModalCard = () => {
-    const { isModalOpen, closeModal } = UseContext();
+    const { isModalOpen, closeModal , triggerReload, nameCard,updateNameCard, cardSelected} = UseContext();
     const [isAnimating, setIsAnimating] = useState(isModalOpen);
-    const [cardName, setCardName] = useState('');
+    const [cardName, setCardName] = useState("");
     const [file, setFile] = useState(null);
     const handleNameChange = (e) => setCardName(e.target.value);
     const handleFileChange = (e) => setFile(e.target.files[0]);
 
-
-  const [createCard, { data, loading, error }] = useMutation(CREATE_CARD, {
+    useEffect(()=>{
+        setCardName(nameCard);
+    },[])
+  const [createCard, { data, loading, error }] = useMutation(nameCard ? UPDATE_CARD : CREATE_CARD , {
  
     onCompleted: (data) => {
-      if (data.createCard.success) {
+      if (nameCard ? data.updateCard.success : data.createCard.success) {
+     
+        triggerReload()
+
+        closeModal()
         alert("Card criado com sucesso!");
       } else {
         alert("Falha ao criar o card.");
@@ -31,23 +37,19 @@ const ModalCard = () => {
 
             return;
         }
-console.log(file)
-        const formData = new FormData();
-        formData.append("name", cardName);
-        formData.append("file", file);
-      
-
-        console.log(formData);
-
-        for (let pair of formData.entries()) {
-            console.log(pair[0] + ": " + pair[1]);
-        }
 
       
     try {
-        createCard({ variables: { cardName, file } });
+        var id = cardSelected
+        createCard({ variables: {id,  cardName, file } });
+
+
+
       } catch (err) {
         console.error("Erro ao criar o card:", err);
+      }
+      finally{
+        
       }
     };
 
@@ -134,7 +136,7 @@ console.log(file)
                         text-[11pt]">DIGITE UM NOME PARA O CARD</label>
                         <input
                             type="text"
-                            value={cardName}
+                            defaultValue={nameCard}
                             onChange={handleNameChange}
                             className="mt-2  
                             w-full 

@@ -25,7 +25,7 @@ const Card = ({idCard, image, cardName, status }) => {
             <div className="flex w-full items-center  ">
                 <div className='flex w-full m-1  justify-around'>
                     <BotaoCardExcluirGrid idCard={idCard}/>
-                    <BotaoCardEditarGrid />
+                    <BotaoCardEditarGrid nameCard={cardName} idCard={idCard} />
 
                 </div>
 

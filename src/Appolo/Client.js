@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 const uploadLink = createUploadLink({
-  uri: "https://localhost:7082/graphql/", 
+  uri: "https://avaliacaoimpaapi20241204013523.azurewebsites.net/graphql/", 
   headers: {
     'GraphQL-Preflight': 'true', // Esse cabeçalho é necessário para multi-part requests
   },// Atualize para o URI do seu servidor

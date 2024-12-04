@@ -17,3 +17,11 @@ export const CREATE_CARD = gql`mutation ($file: Upload!, $cardName: String!) {
     }
   }
   `;
+
+  export const UPDATE_CARD = gql`mutation ($id:Int!, $cardName: String!, $file: Upload!) {
+        updateCard(id: $id, cardUpdateGrapQLType: { cardName: $cardName, status: ATIVO, file:$file  }) {
+    success
+    errors
+  }
+}
+  `;
