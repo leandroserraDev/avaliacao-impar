@@ -8,7 +8,14 @@ function Navegacao({ reloadData, pageSize}) {
     <button
     disabled={ (pageSize <= 1) }
     onClick={() => reloadData()}
-      className={`text-white px-6 py-2 rounded-md ${ pageSize > 1?  'hover:bg-orange-600' : null} transition duration-300 ${pageSize <= 1  ? 'bg-gray-400' : 'bg-orange-500'}`}
+      className={`text-white            
+        duration-200
+         shadow-lg
+                       transition-all
+                       hover:scale-105
+                        px-6
+                         py-2
+                          rounded-md ${ pageSize > 1?  'hover:bg-orange-600' : null} transition duration-300 ${pageSize <= 1  ? 'bg-gray-400' : 'bg-orange-500'}`}
     >
      Adicionar mais
     </button>

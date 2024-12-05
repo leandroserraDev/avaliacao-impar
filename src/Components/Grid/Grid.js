@@ -19,6 +19,10 @@ export default function Grid({ cards, reloadData, currentPage, pageSize }) {
                 font-semibold  
                 text-[20pt]">Resultado da pesquisa</span>
                 <button onClick={openModal} class="
+                                 duration-200
+                       transition-all
+                       hover:scale-105
+                           shadow-md
                 bg-orange-500 
                 text-white 
                 font-semibold 

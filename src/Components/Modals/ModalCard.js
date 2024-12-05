@@ -187,27 +187,47 @@ const ModalCard = () => {
                     </div>
 
                     <div className="flex 
+                    
                     justify-between">
+               
+                        <button
+                            type="submit"
+                            className="
+                             bg-orange-500 
+                               duration-200
+                       transition-all
+                text-white 
+                font-semibold 
+                py-3 
+                px-8 
+                rounded-lg 
+                hover:bg-orange-600 
+                focus:outline-none 
+                focus:ring-2 
+                focus:ring-orange-400
+                   shadow-md
+                  hover:scale-105 
+                  "
+                        >
+                            Cadastrar
+                        </button>
                         <button
                             type="button"
                             onClick={closeModal}
-                            className="px-4 
-                            py-2 
-                            bg-gray-500
-                             text-white 
-                             rounded-md"
+                            className="bg-gray-500 
+                                       duration-200
+                       transition-all
+                text-white 
+                font-semibold 
+                py-3 
+                px-8 
+                rounded-lg 
+                focus:outline-none 
+                focus:ring-2
+                 shadow-md
+                  hover:scale-105 " 
                         >
                             Fechar
-                        </button>
-                        <button
-                            type="submit"
-                            className="px-4 
-                            py-2 
-                            bg-blue-500 
-                            text-whit
-                            e rounded-md"
-                        >
-                            Cadastrar
                         </button>
                     </div>
                 </form>
